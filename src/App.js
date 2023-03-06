@@ -3,6 +3,8 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
 import Img from "./assets/gratitude.jpg";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
@@ -48,7 +50,7 @@ export default function App() {
                   sık sık teşekkür ettiği şeyleri yazdığı bir tür günlüktür.
                   Zihinsel iyi oluş için basit fakat oldukça etkili bir
                   yöntemdir ve kişinin hayata pozitif bir bakış açısı
-                  geliştirmesine yardımcı olabilir.{" "}
+                  geliştirmesine yardımcı olabilir.
                 </p>
               </div>
             </div>
@@ -66,6 +68,18 @@ export default function App() {
           </div>
         </Route>
       </Switch>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

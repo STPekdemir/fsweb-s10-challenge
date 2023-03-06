@@ -3,8 +3,13 @@ import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
 import { useHistory } from "react-router";
 import Gratitude from "./../assets/grForm.png";
+import { useDispatch } from "react-redux";
+import { notEkle } from "../actions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PostForm() {
+  const eklendiBildiri = () => toast("Minnet başarıyla eklendi.");
   const {
     register,
     handleSubmit,
@@ -12,6 +17,7 @@ export default function PostForm() {
   } = useForm({ mode: "onChange" });
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   function onSubmit(data) {
     const yeniNot = {
@@ -21,11 +27,12 @@ export default function PostForm() {
         .filter((v) => v !== "")
         .join("|"),
     };
-
+    dispatch(notEkle(yeniNot));
     // burada ilgili eylemi dispatch edin
     // toast mesajı gösterin
     // sonra aşağıdaki satırı aktifleştirin
-    // setTimeout(() => history.push("/notlar"), 2000);
+    setTimeout(() => history.push("/notlar"), 2000);
+    eklendiBildiri();
   }
 
   const inputCx = "border border-zinc-300 h-9 rounded-none text-sm px-2 w-full";
@@ -35,7 +42,6 @@ export default function PostForm() {
       <div className="flex-1">
         <img src={Gratitude} alt="" className="block object-cover h-full" />
       </div>
-
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -48,8 +54,8 @@ export default function PostForm() {
           yansıtmalara kadar pek çok şeyden oluşabilir.
         </p>
         <p className="text-stone-700 my-3 text-xs">
-          Her gün belli saatlerde 3 maddeden oluşan bir liste
-          yapmak, bu alışkanlığa iyi bir başlangıç noktası sayılır.
+          Her gün belli saatlerde 3 maddeden oluşan bir liste yapmak, bu
+          alışkanlığa iyi bir başlangıç noktası sayılır.
         </p>
         <div>
           <input
@@ -76,10 +82,7 @@ export default function PostForm() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="myButton"
-        >
+        <button type="submit" className="myButton">
           Ekle
         </button>
       </form>
