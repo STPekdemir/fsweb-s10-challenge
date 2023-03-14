@@ -22,9 +22,9 @@ function localStorageStateOku(key) {
 function baslangicNotlariniGetir(key) {
   const eskiNotlar = localStorage.getItem(key);
 
-  if (eskiNotlar.length >= 1) {
+  if (eskiNotlar) {
     return localStorageStateOku(key);
-  } else if (eskiNotlar.length === 0) {
+  } else {
     return baslangicDegerleri;
   }
 }
